@@ -5,6 +5,7 @@ import NavBar from '@/components/NavBar'
 import SideNav from '@/components/SideNav'
 
 import HomePage from '@/views/HomePage'
+import Registration from '@/views/Registration'
 
 Vue.use(Router)
 
@@ -20,7 +21,16 @@ export default new Router({
         sidenav: SideNav,
         default: HomePage
       },
+
       // beforeEnter: needAuth
-    }
+    },
+    {
+      path: '/registration',
+      name: 'Registration',
+      components: {
+        default: Registration
+      },
+      // beforeEnter: noAuth
+    },
   ]
 })
