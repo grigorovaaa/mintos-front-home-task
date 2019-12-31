@@ -1,5 +1,4 @@
 <template>
-
   <div class="container height100">
     <div class="row height100">
       <div class="valign-wrapper height100">
@@ -94,7 +93,7 @@ export default {
             }
           })
           .catch(e => {
-            console.error(e.toString())
+            console.error(e)
             this.toastErr('Error during email check - try later')
           })
           .finally(() => {
@@ -102,7 +101,6 @@ export default {
       }
     },
     registration () {
-      // this.$store.commit('Preloader/add')
       const params = {
         email: this.email,
         password: this.password

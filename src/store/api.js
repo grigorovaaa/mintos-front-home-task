@@ -11,9 +11,9 @@ function callPost (url, data, context) {
       url,
       data,
       {
-        headers: {
-          Authorization: 'Bearer ' + context.rootState.Auth.token
-        }
+        // headers: {
+        //   Authorization: 'Bearer ' + context.rootState.Auth.token
+        // }
       })
       .then(({ data, status }) => {
         if (status === 200 || status === 201) {
@@ -39,9 +39,9 @@ function callHead (url, context) {
     axios.head(
       url,
       {
-        headers: {
-          Authorization: 'Bearer ' + context.rootState.Auth.token
-        }
+        // headers: {
+        //   Authorization: 'Bearer ' + context.rootState.Auth.token
+        // }
       })
       .then(({ data, status }) => {
         if (status === 204) {
@@ -68,10 +68,24 @@ export default {
   getters: {
   },
   actions: {
+    LOGIN (context, payload) {
+      return new Promise((resolve, reject) => {
+        const data = payload.params || []
+        const url = URL_BACKEND + 'login_check'
+        callPost(url, data, context)
+          .then(result => {
+            debug('call API result', { result, data, url: url })
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     REGISTRATION (context, payload) {
       return new Promise((resolve, reject) => {
         const data = payload.params || []
-        const url = URL_BACKEND + 'register'
+        const url = URL_BACKEND + 'registration'
         callPost(url, data, context)
           .then(result => {
             let isCreated
@@ -92,14 +106,14 @@ export default {
       return new Promise((resolve, reject) => {
         const data = payload.params || []
 
-        const url = URL_BACKEND + 'register?email=' + payload.params.email
+        const url = URL_BACKEND + 'registration?email=' + payload.params.email
         callHead(url, context)
           .then(status => {
             let isFree
             if (status === 204) {
-              isFree = true
-            } else if (status === 404) {
               isFree = false
+            } else if (status === 404) {
+              isFree = true
             }
             debug('call API status', { status, data, url: url })
             resolve(isFree)
