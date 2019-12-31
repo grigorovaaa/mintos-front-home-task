@@ -122,6 +122,20 @@ export default {
             reject(err)
           })
       })
+    },
+    TOKEN_REFRESH (context, payload) {
+      return new Promise((resolve, reject) => {
+        const data = payload.params || []
+        const url = URL_BACKEND + 'token/refresh'
+        callPost(url, data, context)
+          .then(result => {
+            debug('call API result', { result, data, url: URL_BACKEND })
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
     }
   }
 }
