@@ -33,7 +33,7 @@ export default {
   name: 'NavBar',
   data () {
     return {
-      localesList: ['en', 'ru']
+      localesList: ['en']
     }
   },
   mounted () {

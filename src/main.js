@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import VueI18n from 'vue-i18n'
 import messages from './i18n'
+import VueMoment from 'vue-moment'
 
 import 'materialize-css'
 import './assets/materialize.css'
@@ -15,6 +16,7 @@ const i18n = new VueI18n({
   locale: 'en', // set locale
   messages // set locale messages
 })
+Vue.use(VueMoment)
 
 new Vue({
   router,

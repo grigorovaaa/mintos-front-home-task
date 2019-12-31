@@ -64,6 +64,34 @@ function callHead (url, context) {
   })
 }
 
+function callGet (url, context) {
+  debug('call API get', { url })
+  return new Promise((resolve, reject) => {
+    let err = ''
+    axios.get(
+      url,
+      {
+        headers: {
+          Authorization: 'Bearer ' + context.rootState.Auth.token
+        }
+      })
+      .then(({ data, status }) => {
+        if (status === 200) {
+          resolve({ data, status })
+        } else {
+          err = 'status not 200'
+          console.error(err)
+          reject(err)
+        }
+      })
+      .catch(e => {
+        err = e.toString()
+        console.error(e)
+        reject(err)
+      })
+  })
+}
+
 export default {
   getters: {
   },
@@ -136,6 +164,30 @@ export default {
             reject(err)
           })
       })
-    }
+    },
+    FEED (context) {
+      return new Promise((resolve, reject) => {
+        callGet(URL_BACKEND + 'rss/feed', context)
+          .then(result => {
+            debug('call API result', { result, url: URL_BACKEND })
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    KEYWORDS (context) {
+      return new Promise((resolve, reject) => {
+        callGet(URL_BACKEND + 'rss/keywords', context)
+          .then(result => {
+            debug('call API result', { result, url: URL_BACKEND })
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
   }
 }
