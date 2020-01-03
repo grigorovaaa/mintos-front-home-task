@@ -188,6 +188,6 @@ export default {
             reject(err)
           })
       })
-    },
+    }
   }
 }

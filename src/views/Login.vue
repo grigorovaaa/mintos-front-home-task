@@ -84,7 +84,7 @@ export default {
           }
         })
         .catch(e => {
-          this.toastErr(e.message)
+          this.toastErr('wrong login or password')
         })
         .finally(() => {
           this.$store.dispatch('Auth/init')
