@@ -1,7 +1,6 @@
 <template>
   <main>
     <div class="container">
-      <h4>{{ $t('ui.headers.rss') }}</h4>
       <div class="row">
         <div class="col s12">
           <feed-key-words />
